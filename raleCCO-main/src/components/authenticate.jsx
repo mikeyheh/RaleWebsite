@@ -6,7 +6,7 @@ const AuthenticateUser = () => {
 
     useEffect(() => {
       const storedToken = localStorage.getItem('token');
-      (storedToken) ? navigate("/components/frontPage") : navigate("/components/frontPage") ;
+      (storedToken) ? navigate("/frontPage") : navigate("/frontPage") ;
     }, [navigate]);
 
     return (

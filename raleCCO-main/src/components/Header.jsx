@@ -19,9 +19,9 @@ function Header() {
     if (isAuthenticated) {
       localStorage.removeItem('token');
       setIsAuthenticated(false);
-      navigate("/components/frontPage");
+      navigate("/frontPage");
     }else{
-      navigate("/components/loginPage");
+      navigate("/loginPage");
     }
     setShowDropdown(false);
   };
@@ -35,14 +35,14 @@ function Header() {
   };
 
   const handleShirtCatalogClick = () => {
-    if (location.pathname === "/components/frontPage") {
+    if (location.pathname === "/frontPage") {
       scroller.scrollTo("shirtCatalog", {
         smooth: true,
         duration: 500,
         offset: -150,
       });
     } else {
-      navigate("/components/frontPage");
+      navigate("/frontPage");
       setTimeout(() => {
         scroller.scrollTo("shirtCatalog", {
           smooth: true,
@@ -54,14 +54,14 @@ function Header() {
   };
 
   const handleShirtCatalogClick2 = () => {
-    if (location.pathname === "/components/frontPage") {
+    if (location.pathname === "/frontPage") {
       scroller.scrollTo("Footer", {
         smooth: true,
         duration: 500,
         offset: 0,
       });
     } else {
-      navigate("/components/frontPage");
+      navigate("/frontPage");
       setTimeout(() => {
         scroller.scrollTo("Footer", {
           smooth: true,
@@ -75,7 +75,7 @@ function Header() {
   return (
     <div className="w-full z-50">
       <header className="bg-[#f4f2f2] flex justify-between items-center w-[100vw] p-6 h-2 sm:h-[2vw] md:h-[3vw] lg:h-[4vw] xl:h-[4vw] 2xl:h-[5vw] ">
-        <Link to="/components/frontPage" className="cursor-pointer hover:scale-105 z-50">
+        <Link to="/frontPage" className="cursor-pointer hover:scale-105 z-50">
           <img src="/logo.png" alt="Logo" className="w-[20vw] sm:w-[8vw] md:w-[9vw] lg:w-[9vw] xl:w-[9vw] 2xl:w-[10vw]" />
         </Link>
 
@@ -83,7 +83,7 @@ function Header() {
           <button onClick={handleShirtCatalogClick} className="cursor-pointer font-bold text-[1.35rem] p-4 tracking-wider no-underline text-black hover:text-gray-600 hover:scale-105 sm:text-[1.15rem] md:text-[1.20rem] lg:text-[1.25rem] xl:text-[1.30rem] 2xl:text-[1.35rem]">
             SHIRT CATALOG
           </button>
-          <Link to="/components/shopPage" className="cursor-pointer font-bold text-[1.35rem] p-4 tracking-wider no-underline text-black hover:text-gray-600 hover:scale-105 sm:text-[1.15rem] md:text-[1.20rem] lg:text-[1.25rem] xl:text-[1.30rem] 2xl:text-[1.35rem]">
+          <Link to="/shopPage" className="cursor-pointer font-bold text-[1.35rem] p-4 tracking-wider no-underline text-black hover:text-gray-600 hover:scale-105 sm:text-[1.15rem] md:text-[1.20rem] lg:text-[1.25rem] xl:text-[1.30rem] 2xl:text-[1.35rem]">
             SHOP
           </Link>
           <button onClick={handleShirtCatalogClick2} className="cursor-pointer font-bold text-[1.35rem] p-4 tracking-wider no-underline text-black hover:text-gray-600 hover:scale-105 sm:text-[1.15rem] md:text-[1.20rem] lg:text-[1.25rem] xl:text-[1.30rem] 2xl:text-[1.35rem]">
@@ -110,7 +110,7 @@ function Header() {
             )}
           </div>
 
-          <Link to="/components/checkoutPage">
+          <Link to="/checkoutPage">
             <span className="material-symbols-outlined text-[3rem] font-extrabold cursor-pointer hover:scale-105 sm:text-[2rem] md:text-[2rem] lg:text-[2.3rem] xl:text-[2.85rem] 2xl:text-[3rem] sm:p-1.2 md:p-1.4 lg:p-1.6 xl:p-1.8m xl:p-2">
               shopping_bag
             </span>
@@ -125,7 +125,7 @@ function Header() {
             
             {showDropdown && (
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                <Link to="/components/accountPage">
+                <Link to="/accountPage">
                   <button 
                     className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
                   >

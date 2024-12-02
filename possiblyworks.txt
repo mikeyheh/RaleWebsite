@@ -1,0 +1,160 @@
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Header from "./Header";
+
+function CheckoutPage() {
+    const navigate = useNavigate();
+    const [storedToken, setStoredToken] = useState(null);
+    const [cartItems, setCartItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (!token) navigate("/components/loginPage");
+        else {
+            setStoredToken(token);
+            fetchCartItems(token);
+        }
+    }, [navigate]);
+
+    const fetchCartItems = async (token) => {
+        try {
+            const response = await axios.get("http://localhost:8590/cartItem/1", {
+                headers: { Authorization: `${token}` },
+            });
+            setCartItems(response.data);
+            setLoading(false);
+        } catch (error) {
+            console.error("Error fetching cart items:", error);
+            setLoading(false);
+        }
+    };
+
+    const updateQuantity = async (itemId, increment) => {
+        const item = cartItems.find(item => item.id === itemId);
+        if (!item) return;
+
+        const newQuantity = Math.max(1, item.quantity + increment);
+        
+        try {
+            await axios.put(`http://localhost:8590/cartItem/edit/${itemId}`, 
+                { quantity: newQuantity },
+                { headers: { Authorization: `${storedToken}` }}
+            );
+
+            setCartItems(prevItems =>
+                prevItems.map(item =>
+                    item.id === itemId
+                        ? { ...item, quantity: newQuantity }
+                        : item
+                )
+            );
+        } catch (error) {
+            console.error("Error updating quantity:", error);
+        }
+    };
+
+    const handleButtonClick = (event) => {
+        const button = event.currentTarget;
+        button.classList.add("scale-95", "bg-gray-300");
+        setTimeout(() => {
+            button.classList.remove("scale-95", "bg-gray-300");
+        }, 150);
+    };
+
+    const getItemTotal = (price, quantity) => price * quantity;
+    const totalCost = cartItems.reduce((sum, item) => sum + getItemTotal(item.price, item.quantity), 0);
+
+    if (loading) {
+        return <div className="w-full h-screen flex items-center justify-center">Loading...</div>;
+    }
+
+    return (
+        <div className="w-full h-screen">
+            <Header />
+            <div className="relative bg-gray-200 p-5 w-full h-auto drop-shadow-xl">
+                <div
+                    className="absolute font-bold drop-shadow-2xl font-archivo-black text-[11vw] tracking-tighter text-white"
+                    style={{
+                        top: "15%",
+                        left: "49%",
+                        transform: "translate(-50%, -50%) scaleX(1.4)",
+                        whiteSpace: "nowrap",
+                    }}>
+                    CHECKOUT
+                </div>
+
+                <div className="bg-white z-10 flex flex-col p-5 mx-[10%] gap-4 rounded-2xl relative top-[12vh]">
+                    <div className="flex flex-row text-lg">
+                        <div className="w-1/2">
+                            <div>Product</div>
+                        </div>
+                        <div className="w-1/2 flex justify-between">
+                            <div>Price</div>
+                            <div>Quantity</div>
+                            <div>Total Price</div>
+                        </div>
+                    </div>
+
+                    {cartItems.map((item) => (
+                        <div key={item.id} className="relative bg-gray-200 p-4 rounded-xl h-auto flex flex-row">
+                            <div className="w-1/2 flex gap-3 flex-row">
+                                <div className="relative w-[12vw]">
+                                    <img src={item.imageUrl} alt={item.name} className="absolute p-3 rounded-3xl z-1 drop-shadow-lg" />
+                                    <div className="bg-white w-[12vw] h-[12vw] rounded-xl"></div>
+                                </div>
+                                <div className="my-auto">
+                                    <div className="text-lg text-gray-400">{item.category}</div>
+                                    <div className="text-3xl">{item.name}</div>
+                                    <div className="">{item.description}</div>
+                                </div>
+                            </div>
+                            <div className="w-1/2 flex justify-between">
+                                <div className="my-auto text-xl text-gray-500 italic">₱{item.price.toFixed(2)}</div>
+                                <div className="text-xl flex my-auto flex-row border-2 border-black rounded-xl">
+                                    <button
+                                        onClick={(e) => {
+                                            handleButtonClick(e);
+                                            updateQuantity(item.id, -1);
+                                        }}
+                                        className="border-y-1 p-1 px-2 rounded-xl border-black transition-all duration-150">
+                                        -
+                                    </button>
+                                    <div className="border-1 p-1 px-3 border-black">{item.quantity}</div>
+                                    <button
+                                        onClick={(e) => {
+                                            handleButtonClick(e);
+                                            updateQuantity(item.id, 1);
+                                        }}
+                                        className="border-y-1 p-1 px-2 rounded-xl border-black transition-all duration-150">
+                                        +
+                                    </button>
+                                </div>
+                                <div className="my-auto text-xl text-gray-500 italic">
+                                    ₱{getItemTotal(item.price, item.quantity).toFixed(2)}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="bg-white z-10 flex p-4 mx-[10%] gap-4 flex-row justify-between rounded-2xl relative top-[15vh]">
+                    <div className="flex flex-row gap-4">
+                        <div className="text-xl my-auto">Total Cost: </div>
+                        <div className="text-6xl my-auto">₱{totalCost.toFixed(2)}</div>
+                    </div>
+                    <button 
+                        onClick={handleButtonClick} 
+                        className="bg-gray-200 w-[18vw] my-auto grid justify-items-center p-3 text-2xl rounded-xl"
+                    >
+                        Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default CheckoutPage;

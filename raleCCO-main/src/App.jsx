@@ -26,14 +26,15 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<AuthenticateUser />} />
-        <Route path="/components/Dashboard" element={<Dashboard />} />
-        <Route path="/components/shirtcatalog" element={<ShirtCatalog />} />
-        <Route path="/components/shopPage" element={<ShopPage />} />
-        <Route path="/components/frontPage" element={<FrontPage />} />
-        <Route path="/components/checkoutPage" element={<CheckoutPage />} />
-        <Route path="/components/accountPage" element = {<AccountPage/>} />
-        <Route path="/components/productPage" element = {<ProductPage/>} />
-        <Route path="/components/loginPage" element = {<LoginPage/>} />
+        <Route path="/Dashboard" element={<Dashboard />} />
+        <Route path="/shirtcatalog" element={<ShirtCatalog />} />
+        <Route path="/shopPage" element={<ShopPage />} />
+        <Route path="/frontPage" element={<FrontPage />} />
+        <Route path="/checkoutPage" element={<CheckoutPage />} />
+        <Route path="/accountPage" element = {<AccountPage/>} />
+        <Route path="/productPage" element = {<ProductPage/>} />
+        <Route path="/loginPage" element = {<LoginPage/>} />
+        <Route path="/registerPage" element = {<RegisterPage/>} />
       </Routes>
     </Router>
   );
