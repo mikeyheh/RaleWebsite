@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function ShopPage2() {
-    // State for current page and selected filter
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedFilter, setSelectedFilter] = useState('all');
     const [showFilters, setShowFilters] = useState(false);
+    const [allProducts, setAllProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    // Products per page constant
     const PRODUCTS_PER_PAGE = 16;
 
-    // Filter options
     const filters = [
         { id: 'all', label: 'See All' },
         { id: 'basics', label: 'Basics' },
@@ -17,45 +19,54 @@ function ShopPage2() {
         { id: 'oversized', label: 'Oversized' }
     ];
 
-    // Sample product data - expanded to test pagination
-    const allProducts = [
-        { id: 1, name: 'Do Not Disturb Tee', type: 'graphic', price: '₱499.00', image: '/rale1.png' },
-        { id: 2, name: 'Another Day Tee', type: 'basics', price: '₱499.00', image: '/rale4.png' },
-        { id: 3, name: 'Strapped Tee', type: 'graphic', price: '₱499.00', image: '/strapped.png' },
-        { id: 4, name: 'Superiority Tee', type: 'oversized', price: '₱499.00', image: '/superiority.png' },
-        { id: 5, name: 'Classic Tee', type: 'basics', price: '₱499.00', image: '/embrace1.png' },
-        { id: 6, name: 'Urban Tee', type: 'graphic', price: '₱499.00', image: '/rale3.png' },
-        { id: 7, name: 'Street Tee', type: 'oversized', price: '₱499.00', image: '/rale7.png' },
-        { id: 8, name: 'Modern Tee', type: 'basics', price: '₱499.00', image: '/rale6.png' },
-        { id: 9, name: 'Vintage Tee', type: 'graphic', price: '₱499.00', image: '/rale1.png' },
-        { id: 10, name: 'Retro Tee', type: 'basics', price: '₱499.00', image: '/rale4.png' },
-        { id: 11, name: 'Metro Tee', type: 'graphic', price: '₱499.00', image: '/strapped.png' },
-        { id: 12, name: 'City Tee', type: 'oversized', price: '₱499.00', image: '/superiority.png' },
-        { id: 13, name: 'Downtown Tee', type: 'basics', price: '₱499.00', image: '/embrace1.png' },
-        { id: 14, name: 'Uptown Tee', type: 'graphic', price: '₱499.00', image: '/rale3.png' },
-        { id: 15, name: 'Midtown Tee', type: 'oversized', price: '₱499.00', image: '/rale7.png' },
-        { id: 16, name: 'Borough Tee', type: 'basics', price: '₱499.00', image: '/rale6.png' },
-        { id: 17, name: 'District Tee', type: 'graphic', price: '₱499.00', image: '/rale1.png' },
-        { id: 18, name: 'Zone Tee', type: 'basics', price: '₱499.00', image: '/rale4.png' },
-        // Add more products as needed
-    ];
+    useEffect(() => {
+        fetchProducts();
+    }, []);
 
-    // Filter products based on selected filter
-    const filteredProducts = selectedFilter === 'all' 
-        ? allProducts 
-        : allProducts.filter(product => product.type === selectedFilter);
+    useEffect(() => {
+        filterProducts();
+        setCurrentPage(1);
+    }, [selectedFilter, allProducts]);
 
-    // Calculate total pages based on filtered products
-    const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
+    const fetchProducts = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get('http://localhost:8590/product');
+            setAllProducts(response.data);
+            setError(null);
+        } catch (err) {
+            setError('Failed to fetch products');
+            console.error('Error fetching products:', err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-    // Get current page products
+    const filterProducts = () => {
+        if (selectedFilter === 'all') {
+            setFilteredProducts(allProducts);
+        } else {
+            const categoryMap = {
+                'basics': 'BASICS',
+                'graphic': 'GRAPHICTEES',
+                'oversized': 'OVERSIZED'
+            };
+            const filtered = allProducts.filter(product => 
+                product.category === categoryMap[selectedFilter]
+            );
+            setFilteredProducts(filtered);
+        }
+    };
+
+    const totalPages = Math.max(1, Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE)); //If totalPages dont change after full change this
+    
+
     const getCurrentPageProducts = () => {
         const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
         const endIndex = startIndex + PRODUCTS_PER_PAGE;
         return filteredProducts.slice(startIndex, endIndex);
     };
 
-    // Handle page navigation
     const handlePrevPage = () => {
         setCurrentPage(prev => Math.max(1, prev - 1));
     };
@@ -64,12 +75,6 @@ function ShopPage2() {
         setCurrentPage(prev => Math.min(totalPages, prev + 1));
     };
 
-    // Reset to first page when filter changes
-    React.useEffect(() => {
-        setCurrentPage(1);
-    }, [selectedFilter]);
-
-    // Render product card
     const ProductCard = ({ product }) => (
         <div className="relative w-[13vw] h-[16.5vw] items-center">
             <img src={product.image} alt={product.name} className="absolute mx-auto z-1 w-full p-3"/>
@@ -77,10 +82,13 @@ function ShopPage2() {
             <div>
                 <div className="text-sm text-zinc-400 leading-tight">T-Shirt</div>
                 <div className="text-lg text-grey-400 leading-tight">{product.name}</div>
-                <div className="text-sm italic text-zinc-400 leading-tight">{product.price}</div>
+                <div className="text-sm italic text-zinc-400 leading-tight">₱{product.price}</div>
             </div>
         </div>
     );
+
+    if (loading) return <div className="text-center p-10">Loading...</div>;
+    if (error) return <div className="text-center p-10 text-red-500">{error}</div>;
 
     return (
         <div className="relative w-full mx-auto p-4">
