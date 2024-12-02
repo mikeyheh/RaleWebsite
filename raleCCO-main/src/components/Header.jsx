@@ -1,19 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link as ScrollLink, scroller } from "react-scroll";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-
 
 function Header() {
   const location = useLocation();
   const navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    setIsAuthenticated(!!storedToken);
+  }, []);
 
   const [showSearch, setShowSearch] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const toggleSearchBar = () => {
-    setShowSearch(!showSearch); // Toggle the visibility
+  const handleAuthAction = () => {
+    if (isAuthenticated) {
+      localStorage.removeItem('token');
+      setIsAuthenticated(false);
+      navigate("/components/dashboard");
+    }else{
+      navigate("/components/loginPage");
+    }
+    setShowDropdown(false);
   };
+
+  const toggleSearchBar = () => {
+    setShowSearch(!showSearch);
+  };
+  
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
@@ -41,8 +57,8 @@ function Header() {
     if (location.pathname === "/components/frontPage") {
       scroller.scrollTo("Footer", {
         smooth: true,
-        duration: 500, // Animation duration in milliseconds
-        offset: 0, // Adjust as needed to account for any fixed headers
+        duration: 500,
+        offset: 0,
       });
     } else {
       navigate("/components/frontPage");
@@ -52,23 +68,21 @@ function Header() {
           duration: 500,
           offset: 0,
         });
-      }, 500); // Delay to allow page navigation to complete
+      }, 500);
     }
   };
-  
-  
-  
+
   return (
     <div className="w-full z-50">
       <header className="bg-[#f4f2f2] flex justify-between items-center w-[100vw] p-6 h-2 sm:h-[2vw] md:h-[3vw] lg:h-[4vw] xl:h-[4vw] 2xl:h-[5vw] ">
         <Link to="/components/frontPage" className="cursor-pointer hover:scale-105 z-50">
-          <img src="/logo.png" alt="Logo"  className="w-[20vw] sm:w-[8vw] md:w-[9vw] lg:w-[9vw] xl:w-[9vw] 2xl:w-[10vw]" />
+          <img src="/logo.png" alt="Logo" className="w-[20vw] sm:w-[8vw] md:w-[9vw] lg:w-[9vw] xl:w-[9vw] 2xl:w-[10vw]" />
         </Link>
 
-        <div className="flex items-center space-x-8 z-50" >
-            <button onClick={handleShirtCatalogClick} className="cursor-pointer font-bold text-[1.35rem] p-4 tracking-wider no-underline text-black hover:text-gray-600 hover:scale-105 sm:text-[1.15rem] md:text-[1.20rem] lg:text-[1.25rem] xl:text-[1.30rem] 2xl:text-[1.35rem]">
-              SHIRT CATALOG
-            </button>
+        <div className="flex items-center space-x-8 z-50">
+          <button onClick={handleShirtCatalogClick} className="cursor-pointer font-bold text-[1.35rem] p-4 tracking-wider no-underline text-black hover:text-gray-600 hover:scale-105 sm:text-[1.15rem] md:text-[1.20rem] lg:text-[1.25rem] xl:text-[1.30rem] 2xl:text-[1.35rem]">
+            SHIRT CATALOG
+          </button>
           <Link to="/components/shopPage" className="cursor-pointer font-bold text-[1.35rem] p-4 tracking-wider no-underline text-black hover:text-gray-600 hover:scale-105 sm:text-[1.15rem] md:text-[1.20rem] lg:text-[1.25rem] xl:text-[1.30rem] 2xl:text-[1.35rem]">
             SHOP
           </Link>
@@ -78,11 +92,10 @@ function Header() {
         </div>
 
         <div className="flex items-center space-x-4 z-50">
-        <span onClick={toggleSearchBar} className="material-symbols-outlined text-[3rem] font-extrabold cursor-pointer hover:scale-105">
+          <span onClick={toggleSearchBar} className="material-symbols-outlined text-[3rem] font-extrabold cursor-pointer hover:scale-105">
             search
-        </span>
-        <div className="relative">
-           
+          </span>
+          <div className="relative">
             {showSearch && (
               <div
                 className="absolute bg-white border border-gray-300 shadow-sm rounded-md p-1 w-[300px] z-50"
@@ -112,24 +125,18 @@ function Header() {
             
             {showDropdown && (
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                <Link to = "/components/accountPage">
-                <button 
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                >
-                  Profile
-                </button>
+                <Link to="/components/accountPage">
+                  <button 
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                  >
+                    Profile
+                  </button>
                 </Link>
-                {/* <button 
-                  onClick={() => handleNavigation('/settings')} 
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                >
-                  Settings
-                </button> */}
                 <button 
                   className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => console.log('Sign out clicked')}
+                  onClick={handleAuthAction}
                 >
-                  Sign out
+                  {isAuthenticated ? "Sign out" : "Sign in"}
                 </button>
               </div>
             )}

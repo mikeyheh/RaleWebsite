@@ -18,19 +18,22 @@ import LoginPage from "./components/loginPage";
 import RegisterPage from "./components/registerPage";
 import ShopPage from "./components/shopPage";
 import FrontPage from "./components/frontPage";
+import AuthenticateUser from './components/authenticate';
 
 function App() {
 
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/" element={<AuthenticateUser />} />
+        <Route path="/components/Dashboard" element={<Dashboard />} />
         <Route path="/components/shirtcatalog" element={<ShirtCatalog />} />
         <Route path="/components/shopPage" element={<ShopPage />} />
         <Route path="/components/frontPage" element={<FrontPage />} />
         <Route path="/components/checkoutPage" element={<CheckoutPage />} />
         <Route path="/components/accountPage" element = {<AccountPage/>} />
         <Route path="/components/productPage" element = {<ProductPage/>} />
+        <Route path="/components/loginPage" element = {<LoginPage/>} />
       </Routes>
     </Router>
   );
