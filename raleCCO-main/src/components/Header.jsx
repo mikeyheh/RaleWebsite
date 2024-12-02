@@ -19,7 +19,7 @@ function Header() {
     if (isAuthenticated) {
       localStorage.removeItem('token');
       setIsAuthenticated(false);
-      navigate("/components/dashboard");
+      navigate("/components/frontPage");
     }else{
       navigate("/components/loginPage");
     }
