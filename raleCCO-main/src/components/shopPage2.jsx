@@ -1,82 +1,35 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
+import useShopStore from './shopStore'; // Adjust path as needed
+import { useNavigate } from "react-router-dom";
 
 function ShopPage2() {
-    const [currentPage, setCurrentPage] = useState(1);
-    const [selectedFilter, setSelectedFilter] = useState('all');
-    const [showFilters, setShowFilters] = useState(false);
-    const [allProducts, setAllProducts] = useState([]);
-    const [filteredProducts, setFilteredProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    const PRODUCTS_PER_PAGE = 16;
-
-    const filters = [
-        { id: 'all', label: 'See All' },
-        { id: 'basics', label: 'Basics' },
-        { id: 'graphic', label: 'Graphic Tees' },
-        { id: 'oversized', label: 'Oversized' }
-    ];
+    const navigate = useNavigate();
+    const {
+        currentPage,
+        selectedFilter,
+        showFilters,
+        loading,
+        error,
+        filters,
+        filteredProducts,
+        setSelectedFilter,
+        setShowFilters,
+        fetchProducts,
+        handlePrevPage,
+        handleNextPage,
+        getCurrentPageProducts,
+        getTotalPages
+    } = useShopStore();
 
     useEffect(() => {
         fetchProducts();
     }, []);
 
-    useEffect(() => {
-        filterProducts();
-        setCurrentPage(1);
-    }, [selectedFilter, allProducts]);
-
-    const fetchProducts = async () => {
-        try {
-            setLoading(true);
-            const response = await axios.get('http://localhost:8590/product');
-            setAllProducts(response.data);
-            setError(null);
-        } catch (err) {
-            setError('Failed to fetch products');
-            console.error('Error fetching products:', err);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const filterProducts = () => {
-        if (selectedFilter === 'all') {
-            setFilteredProducts(allProducts);
-        } else {
-            const categoryMap = {
-                'basics': 'BASICS',
-                'graphic': 'GRAPHICTEES',
-                'oversized': 'OVERSIZED'
-            };
-            const filtered = allProducts.filter(product => 
-                product.category === categoryMap[selectedFilter]
-            );
-            setFilteredProducts(filtered);
-        }
-    };
-
-    const totalPages = Math.max(1, Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE)); //If totalPages dont change after full change this
-    
-
-    const getCurrentPageProducts = () => {
-        const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
-        const endIndex = startIndex + PRODUCTS_PER_PAGE;
-        return filteredProducts.slice(startIndex, endIndex);
-    };
-
-    const handlePrevPage = () => {
-        setCurrentPage(prev => Math.max(1, prev - 1));
-    };
-
-    const handleNextPage = () => {
-        setCurrentPage(prev => Math.min(totalPages, prev + 1));
-    };
-
     const ProductCard = ({ product }) => (
-        <div className="relative w-[13vw] h-[16.5vw] items-center">
+        <div 
+            className="relative w-[13vw] h-[16.5vw] items-center cursor-pointer transition-transform hover:scale-105"
+            onClick={() => navigate(`/product/${product.productID}`)}
+        >
             <img src={product.image} alt={product.name} className="absolute mx-auto z-1 w-full p-3"/>
             <div className="relative bg-gray-100 w-[13vw] h-[13vw]"></div>
             <div>
@@ -89,6 +42,8 @@ function ShopPage2() {
 
     if (loading) return <div className="text-center p-10">Loading...</div>;
     if (error) return <div className="text-center p-10 text-red-500">{error}</div>;
+
+    const totalPages = getTotalPages();
 
     return (
         <div className="relative w-full mx-auto p-4">
@@ -111,7 +66,7 @@ function ShopPage2() {
                         key={filter.id}
                         onClick={() => setSelectedFilter(filter.id)}
                         className={`text-xl border-2 p-2 rounded-lg transition-colors ${
-                            selectedFilter === filter.id 
+                            selectedFilter === filter.ID 
                                 ? 'border-black bg-black text-white' 
                                 : 'border-gray-600 hover:bg-gray-100'
                         }`}
