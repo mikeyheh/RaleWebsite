@@ -18,22 +18,22 @@ function ShirtCatalog() {
           <div className="h-[45%] w-1/2 border-b-[3px] border-black relative">
             <div className="relative h-full w-1/2 border-r-[3px] border-black">
               <img
-                src="/superiority.png"
+                src="/superiorityB.png"
                 alt="Logo"
                 className="absolute w-[20vw] top-[15%] right-[4.8%]"
               />
               <img
-                src="/strapped.png"
+                src="/strapped1.png"
                 alt="Logo"
                 className="absolute w-[20vw] top-[15%] right-[-97.2%]"
               />
               <img
-                src="/dnd1.png"
+                src="/dndR1.png"
                 alt="Logo"
                 className="absolute w-[23.5vw] top-[125%] right-[-1%]"
               />
               <img
-                src="/dnd2.png"
+                src="/dndR2.png"
                 alt="Logo"
                 className="absolute w-[23.5vw] top-[125%] right-[-100%]"
               />

@@ -22,7 +22,7 @@ function ShopSection() {
 
           <div className="relative h-[26vw] sm:h-[30vw] md:h-[26vw] lg:h-[26vw] hover:scale-[1.02]">
             <div className="w-[100%] sm:w-[75%] md:w-[85%] lg:w-[90%] xl:w-[100%] 2xl:w-[110%] h-[80%] sm:h-[60%] md:h-[65%] lg:h-[75%] xl:h-[75%] 2xl:h-[80%] bg-[#f1f1f1] flex justify-center items-center">
-              <img src="/rale1.png" alt="Logo" className="w-[18vw] sm:w-[20vw] md:w-[18vw] lg:w-[18vw] drop-shadow-md" />
+              <img src="/dndR1.png" alt="Logo" className="w-[18vw] sm:w-[20vw] md:w-[18vw] lg:w-[18vw] drop-shadow-md" />
             </div>
             <div>
               <p className="font-helvetica text-[1vw] text-grey absolute top-[82%]">T-Shirt</p>
@@ -35,7 +35,7 @@ function ShopSection() {
 
           <div className="relative h-[26vw] sm:h-[30vw] md:h-[26vw] lg:h-[26vw] hover:scale-[1.02]">
           <div className="w-[100%] sm:w-[75%] md:w-[85%] lg:w-[90%] xl:w-[100%] 2xl:w-[110%] h-[80%] sm:h-[60%] md:h-[65%] lg:h-[75%] xl:h-[75%] 2xl:h-[80%] bg-[#f1f1f1] flex justify-center items-center">
-              <img src="/rale2.png" alt="Logo" className="w-[18vw] sm:w-[20vw] md:w-[18vw] lg:w-[18vw] drop-shadow-md" />
+              <img src="/existenceB1.png" alt="Logo" className="w-[18vw] sm:w-[20vw] md:w-[18vw] lg:w-[18vw] drop-shadow-md" />
             </div>
             <div>
               <p className="font-helvetica text-[1vw] text-grey absolute top-[82%]">T-Shirt</p>
@@ -48,7 +48,7 @@ function ShopSection() {
 
           <div className="relative h-[26vw] sm:h-[30vw] md:h-[26vw] lg:h-[26vw] hover:scale-[1.02]">
           <div className="w-[100%] sm:w-[75%] md:w-[85%] lg:w-[90%] xl:w-[100%] 2xl:w-[110%] h-[80%] sm:h-[60%] md:h-[65%] lg:h-[75%] xl:h-[75%] 2xl:h-[80%] bg-[#f1f1f1] flex justify-center items-center">
-              <img src="/rale3.png" alt="Logo" className="w-[18vw] sm:w-[20vw] md:w-[18vw] lg:w-[18vw] drop-shadow-md" />
+              <img src="/ordinaryG1.png" alt="Logo" className="w-[18vw] sm:w-[20vw] md:w-[18vw] lg:w-[18vw] drop-shadow-md" />
             </div>
             <div>
               <p className="font-helvetica text-[1vw] text-grey absolute top-[82%]">T-Shirt</p>
@@ -61,7 +61,7 @@ function ShopSection() {
 
           <div className="relative h-[26vw] sm:h-[30vw] md:h-[26vw] lg:h-[26vw] hover:scale-[1.02]">
           <div className="w-[100%] sm:w-[75%] md:w-[85%] lg:w-[90%] xl:w-[100%] 2xl:w-[110%] h-[80%] sm:h-[60%] md:h-[65%] lg:h-[75%] xl:h-[75%] 2xl:h-[80%] bg-[#f1f1f1] flex justify-center items-center">
-              <img src="/rale4.png" alt="Logo" className="w-[18vw] sm:w-[20vw] md:w-[18vw] lg:w-[18vw] drop-shadow-md" />
+              <img src="/anotherDay2.png" alt="Logo" className="w-[18vw] sm:w-[20vw] md:w-[18vw] lg:w-[18vw] drop-shadow-md" />
             </div>
             <div>
               <p className="font-helvetica text-[1vw] text-grey absolute top-[82%]">T-Shirt</p>
@@ -76,7 +76,7 @@ function ShopSection() {
 
           <div className="relative h-[26vw] sm:h-[30vw] md:h-[26vw] lg:h-[26vw] hover:scale-[1.02]">
           <div className="w-[100%] sm:w-[75%] md:w-[85%] lg:w-[90%] xl:w-[100%] 2xl:w-[110%] h-[80%] sm:h-[60%] md:h-[65%] lg:h-[75%] xl:h-[75%] 2xl:h-[80%] bg-[#f1f1f1] flex justify-center items-center">
-              <img src="/rale5.png" alt="Logo" className="w-[18vw] sm:w-[20vw] md:w-[18vw] lg:w-[18vw] drop-shadow-md" />
+              <img src="/tranq2.png" alt="Logo" className="w-[18vw] sm:w-[20vw] md:w-[18vw] lg:w-[18vw] drop-shadow-md" />
             </div>
             <div>
               <p className="font-helvetica text-[1vw] text-grey absolute top-[82%]">T-Shirt</p>
@@ -89,12 +89,12 @@ function ShopSection() {
 
           <div className="relative h-[26vw] sm:h-[30vw] md:h-[26vw] lg:h-[26vw] hover:scale-[1.02]">
           <div className="w-[100%] sm:w-[75%] md:w-[85%] lg:w-[90%] xl:w-[100%] 2xl:w-[110%] h-[80%] sm:h-[60%] md:h-[65%] lg:h-[75%] xl:h-[75%] 2xl:h-[80%] bg-[#f1f1f1] flex justify-center items-center">
-              <img src="/rale6.png" alt="Logo" className="w-[18vw] sm:w-[20vw] md:w-[18vw] lg:w-[18vw] drop-shadow-md" />
+              <img src="/conceit1.png" alt="Logo" className="w-[18vw] sm:w-[20vw] md:w-[18vw] lg:w-[18vw] drop-shadow-md" />
             </div>
             <div>
               <p className="font-helvetica text-[1vw] text-grey absolute top-[82%]">T-Shirt</p>
               <p className="font-helvetica font-bold text-[1.25vw] absolute top-[87.2%]">
-                Kindness First Tee
+                Conceit Tee
               </p>
               <p className="font-helvetica text-[1vw] text-grey absolute top-[94%]">₱499.00</p>
             </div>
@@ -102,12 +102,12 @@ function ShopSection() {
 
           <div className="relative h-[26vw] sm:h-[30vw] md:h-[26vw] lg:h-[26vw] hover:scale-[1.02]">
           <div className="w-[100%] sm:w-[75%] md:w-[85%] lg:w-[90%] xl:w-[100%] 2xl:w-[110%] h-[80%] sm:h-[60%] md:h-[65%] lg:h-[75%] xl:h-[75%] 2xl:h-[80%] bg-[#f1f1f1] flex justify-center items-center">
-              <img src="/rale7.png" alt="Logo" className="w-[18vw] sm:w-[20vw] md:w-[18vw] lg:w-[18vw] drop-shadow-md" />
+              <img src="/superiorityG.png" alt="Logo" className="w-[18vw] sm:w-[20vw] md:w-[18vw] lg:w-[18vw] drop-shadow-md" />
             </div>
             <div>
               <p className="font-helvetica text-[1vw] text-grey absolute top-[82%]">T-Shirt</p>
               <p className="font-helvetica font-bold text-[1.25vw] absolute top-[87.2%]">
-                Fearless Tee
+                Superiority Tee
               </p>
               <p className="font-helvetica text-[1vw] text-grey absolute top-[94%]">₱499.00</p>
             </div>
@@ -115,12 +115,12 @@ function ShopSection() {
 
           <div className="relative h-[26vw] sm:h-[30vw] md:h-[26vw] lg:h-[26vw] hover:scale-[1.02]">
           <div className="w-[100%] sm:w-[75%] md:w-[85%] lg:w-[90%] xl:w-[100%] 2xl:w-[110%] h-[80%] sm:h-[60%] md:h-[65%] lg:h-[75%] xl:h-[75%] 2xl:h-[80%] bg-[#f1f1f1] flex justify-center items-center">
-              <img src="/rale8.png" alt="Logo" className="w-[18vw] sm:w-[20vw] md:w-[18vw] lg:w-[18vw] drop-shadow-md" />
+              <img src="/rise2.png" alt="Logo" className="w-[18vw] sm:w-[20vw] md:w-[18vw] lg:w-[18vw] drop-shadow-md" />
             </div>
             <div>
               <p className="font-helvetica text-[1vw] text-grey absolute top-[82%]">T-Shirt</p>
               <p className="font-helvetica font-bold text-[1.25vw] absolute top-[87.2%]">
-                Free Spirit Tee
+                Rise Beyond Tee
               </p>
               <p className="font-helvetica text-[1vw] text-grey absolute top-[94%]">₱499.00</p>
             </div>

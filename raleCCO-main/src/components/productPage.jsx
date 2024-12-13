@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import useShopStore from './shopStore'; // Adjust path as needed
+import useShopStore from './shopStore';
+import Header from "./Header"; // Adjust path as needed
 
 function ProductPage() {
     const { productId } = useParams();
@@ -39,7 +40,10 @@ function ProductPage() {
     if (!selectedProduct) return <div className="flex justify-center items-center h-screen">Product not found</div>;
 
     return (
+        <div>
+        <Header />
         <div className="w-full h-auto bg-gray-200 p-10">
+            
             {/* Main Product Display */}
             <div className="bg-white rounded-2xl">
                 <div className="p-5">
@@ -82,7 +86,7 @@ function ProductPage() {
                                 </div>
                             </div>
 
-                            <div className="text-5xl text-gray-400 italic">₱{selectedProduct.price}</div>
+                            <div className="text-5xl text-gray-400 italic">₱{selectedProduct.price}.00</div>
 
                             {/* Sizes */}
                             <div className="bg-gray-200 w-auto h-1/4 rounded-xl m-2 my-4">
@@ -213,14 +217,10 @@ function ProductPage() {
                                 <div className="text-sm italic text-zinc-400 leading-tight">₱499.00</div>
                             </div>
                         </div>
-
                     </div>
-                    
-                    
-                    
                 </div>
-
             </div>
+        </div>
         </div>
     );
 }

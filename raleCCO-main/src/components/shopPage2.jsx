@@ -30,12 +30,12 @@ function ShopPage2() {
             className="relative w-[13vw] h-[16.5vw] items-center cursor-pointer transition-transform hover:scale-105"
             onClick={() => navigate(`/product/${product.productID}`)}
         >
-            <img src={product.image} alt={product.name} className="absolute mx-auto z-1 w-full p-3"/>
+            <img src={product.imagePath} alt={product.name} className="absolute mx-auto z-1 w-full p-3 drop-shadow-lg"/>
             <div className="relative bg-gray-100 w-[13vw] h-[13vw]"></div>
             <div>
                 <div className="text-sm text-zinc-400 leading-tight">T-Shirt</div>
                 <div className="text-lg text-grey-400 leading-tight">{product.name}</div>
-                <div className="text-sm italic text-zinc-400 leading-tight">₱{product.price}</div>
+                <div className="text-sm italic text-zinc-400 leading-tight">₱{product.price}.00</div>
             </div>
         </div>
     );
@@ -48,19 +48,16 @@ function ShopPage2() {
     return (
         <div className="relative w-full mx-auto p-4">
             <div className="w-2/3 flex justify-between mx-auto">
-                <div className="text-8xl p-3 px-0">T-SHIRTS</div>
+                <div className="text-8xl p-3 px-0 my-auto">T-SHIRTS</div>
                 <div className="relative text-2xl py-5 p-2 flex justify-center items-center">
-                    <button 
+                    {/* <button 
                         onClick={() => setShowFilters(!showFilters)}
                         className="border-2 rounded-full p-2 px-4 border-gray-600 flex items-center gap-4 hover:bg-gray-100"
                     >
                         <span className="material-symbols-outlined text-2xl">tune</span>
                         <span>Filters</span>
-                    </button>
-                </div>
-            </div>
-
-            <div className="w-2/3 mx-auto p-2 flex gap-4">
+                    </button> */}
+                      <div className="w-full mx-auto p-2 flex gap-4">
                 {filters.map(filter => (
                     <button
                         key={filter.id}
@@ -75,6 +72,10 @@ function ShopPage2() {
                     </button>
                 ))}
             </div>
+                </div>
+            </div>
+
+          
 
             <div className="w-2/3 mx-auto p-2 py-5 flex gap-3 justify-center">
                 <button 
