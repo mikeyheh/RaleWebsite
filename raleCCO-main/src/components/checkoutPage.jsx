@@ -59,7 +59,7 @@ function CheckoutPage() {
                     <div className="relative bg-gray-200 p-4 rounded-xl h-auto flex flex-row">
                         <div className="w-1/2 flex gap-3 flex-row">
                             <div className="relative w-[12vw]">
-                                <img src="/rale1.png" alt="rale" className="absolute p-3 rounded-3xl z-1 drop-shadow-lg" />
+                                <img src="/dndR1.png" alt="rale" className="absolute p-3 rounded-3xl z-1 drop-shadow-lg" />
                                 <div className="bg-white w-[12vw] h-[12vw] rounded-xl"></div>
                             </div>
                             <div className="my-auto">
@@ -97,7 +97,7 @@ function CheckoutPage() {
                     <div className="relative bg-gray-200 p-4 rounded-xl h-auto flex flex-row">
                         <div className="w-1/2 flex gap-3 flex-row">
                             <div className="relative w-[12vw]">
-                                <img src="/strapped.png" alt="rale" className="absolute p-3 rounded-3xl z-1 drop-shadow-lg" />
+                                <img src="/strapped1.png" alt="rale" className="absolute p-3 rounded-3xl z-1 drop-shadow-lg" />
                                 <div className="bg-white w-[12vw] h-[12vw] rounded-xl"></div>
                             </div>
                             <div className="my-auto">

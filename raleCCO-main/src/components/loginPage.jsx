@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function LoginPage() {
@@ -93,14 +93,20 @@ function LoginPage() {
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className={`bg-gray-200 z-10 my-4 p-3 rounded-2xl w-1/3 mx-auto transition-colors
+                        className={`bg-gray-200 z-10 my-2 p-3 rounded-2xl w-1/3 mx-auto transition-colors
                             ${isLoading ? 'bg-gray-400 cursor-not-allowed' : 'hover:bg-gray-300'}`}
                     >
-                        <div className="text-2xl">
+                        <div className="text-2xl p-3 rounded-xl bg-gray-300">
                             {isLoading ? "LOGGING IN..." : "LOGIN"}
                         </div>
                     </button>
+                    <div className="w-full relative mx-auto grid justify-items-center">
+                    <div>Don't Have an Account?
+                    <Link to="/registerPage" className="text-sky-600 "> Sign Up</Link></div>
+                </div>
                 </form>
+
+               
             </div>
         </div>
     );

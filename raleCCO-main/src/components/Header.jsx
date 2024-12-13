@@ -92,9 +92,7 @@ function Header() {
         </div>
 
         <div className="flex items-center space-x-4 z-50">
-          <span onClick={toggleSearchBar} className="material-symbols-outlined text-[3rem] font-extrabold cursor-pointer hover:scale-105">
-            search
-          </span>
+          
           <div className="relative">
             {showSearch && (
               <div

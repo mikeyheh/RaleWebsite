@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function RegisterPage() {
@@ -186,18 +186,24 @@ function RegisterPage() {
                 {errors.phonenumber && <span className="text-red-500 text-sm">{errors.phonenumber}</span>}
               </div>
             </div>
-          </div>
 
-          {errors.submit && (
+            {errors.submit && (
             <div className="text-red-500 text-center mt-4">{errors.submit}</div>
           )}
 
           <button 
             type="submit" 
-            className="bg-gray-200 z-10 my-4 p-3 grid justify-items-center gap-4 rounded-2xl w-1/3 mx-auto relative top-[16vh] h-auto hover:bg-gray-300 transition-colors"
+            className="bg-gray-300 z-10 my-2 p-3 grid justify-items-center gap-2 rounded-2xl w-1/3 mx-auto relative h-auto hover:bg-gray-400 transition-colors"
           >
             <div className="text-2xl">REGISTER</div>
           </button>
+          <div className="w-full relative mx-auto grid justify-items-center">
+                    <div>Already Have an Account?
+                    <Link to="/loginPage" className="text-sky-600 "> Sign In</Link></div>
+                </div>
+          </div>
+
+          
         </form>
       </div>
     </div>
