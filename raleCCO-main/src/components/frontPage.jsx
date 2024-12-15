@@ -19,10 +19,10 @@ function FrontPage() {
         <Element name="shirtCatalog">
           <ShirtCatalog />
         </Element>
-        <Design />
-        <Element name="Footer">
+        {/* <Design /> */}
+        {/* <Element name="Footer">
           <Footer />
-        </Element>
+        </Element> */}
       </div>
     );
   }

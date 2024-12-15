@@ -6,21 +6,22 @@ function Header() {
   const location = useLocation();
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  
-  useEffect(() => {
-    const storedToken = localStorage.getItem('token');
-    setIsAuthenticated(!!storedToken);
-  }, []);
 
   const [showSearch, setShowSearch] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    setIsAuthenticated(!!storedToken);
+  }, []);
 
   const handleAuthAction = () => {
     if (isAuthenticated) {
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
       setIsAuthenticated(false);
       navigate("/frontPage");
-    }else{
+    } else {
       navigate("/loginPage");
     }
     setShowDropdown(false);
@@ -29,9 +30,13 @@ function Header() {
   const toggleSearchBar = () => {
     setShowSearch(!showSearch);
   };
-  
+
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   const handleShirtCatalogClick = () => {
@@ -73,74 +78,76 @@ function Header() {
   };
 
   return (
-    <div className="w-full z-50">
-      <header className="bg-[#f4f2f2] flex justify-between items-center w-[100vw] p-6 h-2 sm:h-[2vw] md:h-[3vw] lg:h-[4vw] xl:h-[4vw] 2xl:h-[5vw] ">
-        <Link to="/frontPage" className="cursor-pointer hover:scale-105 z-50">
-          <img src="/logo.png" alt="Logo" className="w-[20vw] sm:w-[8vw] md:w-[9vw] lg:w-[9vw] xl:w-[9vw] 2xl:w-[10vw]" />
+    <div className="w-full z-[100]">
+      <header className="bg-[#f4f2f2] flex justify-between items-center p-6 w-full h-16 relative">
+        {/* Logo */}
+        <Link to="/frontPage" className="cursor-pointer absolute left-6">
+          <img src="/logo.png" alt="Logo" className="w-[20vw] sm:w-[10vw] md:w-[8vw]" />
         </Link>
 
-        <div className="flex items-center space-x-8 z-50">
-          <button onClick={handleShirtCatalogClick} className="cursor-pointer font-bold text-[1.35rem] p-4 tracking-wider no-underline text-black hover:text-gray-600 hover:scale-105 sm:text-[1.15rem] md:text-[1.20rem] lg:text-[1.25rem] xl:text-[1.30rem] 2xl:text-[1.35rem]">
+        {/* Desktop Navigation - Centered */}
+        <div className="hidden lg:flex items-center space-x-8 justify-center w-full">
+          <button onClick={handleShirtCatalogClick} className="font-bold text-lg text-black hover:text-gray-600">
             SHIRT CATALOG
           </button>
-          <Link to="/shopPage" className="cursor-pointer font-bold text-[1.35rem] p-4 tracking-wider no-underline text-black hover:text-gray-600 hover:scale-105 sm:text-[1.15rem] md:text-[1.20rem] lg:text-[1.25rem] xl:text-[1.30rem] 2xl:text-[1.35rem]">
+          <Link to="/shopPage" className="font-bold text-lg text-black hover:text-gray-600">
             SHOP
           </Link>
-          <button onClick={handleShirtCatalogClick2} className="cursor-pointer font-bold text-[1.35rem] p-4 tracking-wider no-underline text-black hover:text-gray-600 hover:scale-105 sm:text-[1.15rem] md:text-[1.20rem] lg:text-[1.25rem] xl:text-[1.30rem] 2xl:text-[1.35rem]">
+          <button onClick={handleShirtCatalogClick2} className="font-bold text-lg text-black hover:text-gray-600">
             ABOUT
           </button>
         </div>
 
-        <div className="flex items-center space-x-4 z-50">
-          
-          <div className="relative">
-            {showSearch && (
-              <div
-                className="absolute bg-white border border-gray-300 shadow-sm rounded-md p-1 w-[300px] z-50"
-                style={{ top: "50%", right: "4.5vw", transform: "translateY(-50%)" }}
-              >
-                <input
-                  type="text"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Search..."
-                />
-              </div>
-            )}
-          </div>
-
+        {/* Mobile Menu Icon and Shopping Bag Icon */}
+        <div className="flex items-center space-x-4 absolute right-6">
           <Link to="/checkoutPage">
-            <span className="material-symbols-outlined text-[3rem] font-extrabold cursor-pointer hover:scale-105 sm:text-[2rem] md:text-[2rem] lg:text-[2.3rem] xl:text-[2.85rem] 2xl:text-[3rem] sm:p-1.2 md:p-1.4 lg:p-1.6 xl:p-1.8m xl:p-2">
+            <span className="material-symbols-outlined text-3xl font-extrabold cursor-pointer">
               shopping_bag
             </span>
           </Link>
-          <div className="relative">
-            <span 
-              onClick={toggleDropdown}
-              className="material-symbols-outlined text-[3rem] font-extrabold cursor-pointer hover:scale-105 sm:text-[2rem] md:text-[2rem] lg:text-[2.3rem] xl:text-[2.85rem] 2xl:text-[3rem] sm:p-1.2 md:p-1.4 lg:p-1.6 xl:p-1.8m xl:p-2 pr-0"
-            >
-              more_vert
-            </span>
-            
-            {showDropdown && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                <Link to="/accountPage">
-                  <button 
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                  >
-                    Profile
-                  </button>
-                </Link>
-                <button 
-                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                  onClick={handleAuthAction}
-                >
-                  {isAuthenticated ? "Sign out" : "Sign in"}
-                </button>
-              </div>
-            )}
-          </div>
+          <span
+            onClick={toggleMobileMenu}
+            className="material-symbols-outlined text-3xl font-extrabold cursor-pointer"
+          >
+            more_vert
+          </span>
         </div>
       </header>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="absolute top-16 left-0 w-full bg-white shadow-lg z-[100]">
+          <div className="flex flex-col p-4 space-y-4">
+            <div>
+              <button onClick={handleShirtCatalogClick} className="text-black font-bold">
+                SHIRT CATALOG
+              </button>
+            </div>
+            <div>
+              <Link to="/shopPage" className="text-black font-bold">
+                SHOP
+              </Link>
+            </div>
+            <div>
+              <button onClick={handleShirtCatalogClick2} className="text-black font-bold">
+                ABOUT
+              </button>
+            </div>
+            <hr className="border-t border-gray-300" />
+            <div>
+              <Link to="/accountPage">
+                <button className="text-black">Profile</button>
+              </Link>
+            </div>
+            <div>
+              <button onClick={handleAuthAction} className="text-black">
+                {isAuthenticated ? "Sign out" : "Sign in"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
